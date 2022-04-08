@@ -66,7 +66,7 @@ class Aphorisms_Plugin implements Typecho_Plugin_Interface
   `sort` varchar(32) default NULL COMMENT \'分类\',
   PRIMARY KEY  (`aid`),
   UNIQUE KEY `quotation` (`quotation`)
-) ENGINE=%engine% DEFAULT CHARSET=%charset%;');
+)');
         }
         try {
             $db->query($sql, Typecho_Db::WRITE);
@@ -77,7 +77,7 @@ class Aphorisms_Plugin implements Typecho_Plugin_Interface
               if($code === '42S01') {
                 return '检查到以前的数据表';
             } else {
-                throw new Typecho_Plugin_Exception('数据表初始化失败。错误号：' . $code);
+                throw new Typecho_Plugin_Exception('数据表初始化失败。错误号：' . $code . $prefix . $engine . $charset);
             }
         }
     }
@@ -97,7 +97,7 @@ class Aphorisms_Plugin implements Typecho_Plugin_Interface
         Helper::addAction('aphorisms-edit', 'Aphorisms_Widget_Edit');
         Helper::addPanel(3, 'Aphorisms/manage-aphorisms.php', _t('名言警句'), _t('管理名言警句'), 'editor');
 
-        Typecho_Plugin::factory('admin/menu.php')->navBar = array('Aphorisms_Plugin', 'menuRender');
+        //Typecho_Plugin::factory('admin/menu.php')->navBar = array('Aphorisms_Plugin', 'menuRender');
         Typecho_Plugin::factory('admin/header.php')->header = array('Aphorisms_Plugin', 'adminHeader');
     }
 
